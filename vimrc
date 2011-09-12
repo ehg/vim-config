@@ -62,8 +62,9 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-" Uncomment to use Jamis Buck's file opening plugin
-map <Leader>t :FuzzyFinderTextMate<Enter>
+noremap <leader>o <Esc>:CommandT<CR>
+noremap <leader>O <Esc>:CommandTFlush<CR>
+noremap <leader>m <Esc>:CommandTBuffer<CR>
 
 " Set ctrl space to autocomplete
 inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
