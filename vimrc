@@ -62,8 +62,8 @@ map <leader>tf :tabfirst<cr>
 map <leader>tl :tablast<cr>
 map <leader>tm :tabmove
 
-noremap <leader>q <Esc>:CommandT<CR>
-noremap <leader>Q <Esc>:CommandTFlush<CR>
+noremap <leader>o <Esc>:CommandT<CR>
+noremap <leader>O <Esc>:CommandTFlush<CR>
 noremap <leader>m <Esc>:CommandTBuffer<CR>
 
 " Set ctrl space to autocomplete
@@ -81,9 +81,7 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-map <F2> :mksession! ~/.vim/session <cr>
-map <F3> :source ~/.vim/session <cr>
-
+set pastetoggle=<F2>
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
