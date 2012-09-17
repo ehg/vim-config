@@ -14,10 +14,12 @@ set showmode                      " Display the mode you're in.
 
 set backspace=indent,eol,start    " Intuitive backspacing.
 
+
 set hidden                        " Handle multiple buffers better.
 
 set wildmenu                      " Enhanced command line completion.
 set wildmode=list:longest         " Complete files like a shell.
+set wildignore+=*.pyc,node_modules/**
 
 set ignorecase                    " Case-insensitive searching.
 set smartcase                     " But case-sensitive if expression contains a capital letter.
@@ -50,7 +52,10 @@ set laststatus=2                  " Show the status line all the time
 " Useful status information at bottom of screen
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
-colorscheme murphy2
+set list
+set listchars=tab:▸\ 
+
+colorscheme jellybeans
 
 " Tab mappings.
 map <leader>tt :tabnew<cr>
@@ -82,9 +87,6 @@ nnoremap : ;
 vnoremap ; :
 vnoremap : ;
 
-map <F2> :mksession! ~/.vim/session <cr>
-map <F3> :source ~/.vim/session <cr>
-
 " Automatic fold settings for specific files. Uncomment to use.
 " autocmd FileType ruby setlocal foldmethod=syntax
 " autocmd FileType css  setlocal foldmethod=indent shiftwidth=2 tabstop=2
@@ -92,4 +94,4 @@ map <F3> :source ~/.vim/session <cr>
 " For the MakeGreen plugin and Ruby RSpec. Uncomment to use.
 autocmd BufNewFile,BufRead *_spec.rb compiler rspec
 
-
+set t_Co=256
