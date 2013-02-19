@@ -25,3 +25,12 @@
 [submodule "bundle/snipmate"]
 	path = bundle/snipmate
 	url = git://github.com/msanders/snipmate.vim.git
+[submodule "bundle/r"]
+	path = bundle/r
+	url = git://github.com/vim-scripts/Vim-R-plugin.git
+[submodule "bundle/screen"]
+	path = bundle/screen
+	url = git://github.com/ervandew/screen.git
+[submodule "bundle/youcompleteme"]
+	path = bundle/youcompleteme
+	url = git://github.com/Valloric/YouCompleteMe.git
