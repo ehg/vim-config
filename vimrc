@@ -51,37 +51,63 @@ set laststatus=2                  " Show the status line all the time
 set statusline=[%n]\ %<%.99f\ %h%w%m%r%y\ %{fugitive#statusline()}%{exists('*CapsLockStatusline')?CapsLockStatusline():''}%=%-16(\ %l,%c-%v\ %)%P
 
 set list
-set listchars=tab:▸\ 
+set listchars=tab:▸\
 
 colorscheme jellybeans
 
-" Tab mappings.
-map <leader>tt :tabnew<cr>
-map <leader>te :tabedit
-map <leader>tc :tabclose<cr>
-map <leader>to :tabonly<cr>
-map <leader>tn :tabnext<cr>
-map <leader>tp :tabprevious<cr>
-map <leader>tf :tabfirst<cr>
-map <leader>tl :tablast<cr>
-map <leader>tm :tabmove
 
 noremap <leader>o <Esc>:CommandT<CR>
 noremap <leader>O <Esc>:CommandTFlush<CR>
 noremap <leader>m <Esc>:CommandTBuffer<CR>
 
-" Set ctrl space to autocomplete
-inoremap <expr> <C-Space> pumvisible() \|\| &omnifunc == '' ?
-\ "\<lt>C-n>" :
-\ "\<lt>C-x>\<lt>C-o><c-r>=pumvisible() ?" .
-\ "\"\\<lt>c-n>\\<lt>c-p>\\<lt>c-n>\" :" .
-\ "\" \\<lt>bs>\\<lt>C-n>\"\<CR>"
-imap <C-@> <C-Space>
-
 nnoremap ; :
-nnoremap : ;
+" nnoremap : ;
 
 vnoremap ; :
-vnoremap : ;
+" vnoremap : ;
 
-set t_Co=256
+if (&term =~ "xterm")
+  set t_Co=256
+elseif (&term =~ "screen")
+  set t_Co=16
+else
+  set t_Co=8
+endif
+
+" Functions
+function TrimEndLines()
+  let save_cursor = getpos(".")
+  :silent! %s#\($\n\s*\)\+\%$##
+  call setpos('.', save_cursor)
+endfunction
+
+function TrimTrailingWhitespaces()
+  let save_cursor = getpos(".")
+  :silent! %s#\s\+$##g
+  call setpos('.', save_cursor)
+endfunction
+
+"Trim empty lines at the EOF
+au BufWritePre * call TrimEndLines()
+au BufWritePre * call TrimTrailingWhitespaces()
+
+set rtp+=~/.vim/bundle/powerline/powerline/bindings/vim
+
+noremap <C-H> :bp<CR>
+noremap <C-L> :bn<CR>
+
+let g:EasyMotion_leader_key = '<Space>'
+nmap s <Space>w
+nmap S <Space>b
+
+let g:syntastic_error_symbol='✖'
+let g:syntastic_warning_symbol='⚠'
+let g:syntastic_style_warning_symbol=':('
+let g:syntastic_style_error_symbol=':('
+
+let g:netrw_liststyle = 4
+
+augroup syn_gutter
+  au BufWinEnter * sign define mysign
+  au BufWinEnter * exe "sign place 1337 line=1 name=mysign buffer=" . bufnr('%')
+augroup END
